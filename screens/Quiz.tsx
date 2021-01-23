@@ -3,7 +3,6 @@ import * as React from 'react'
 import { ActivityIndicator, Button, Caption, Headline, Modal, Paragraph, Surface, Text, Title } from 'react-native-paper'
 import { AppContext, AppState } from '../AppContext'
 import { Image, SafeAreaView, ScrollView, StyleSheet } from 'react-native'
-import { MainParamList, MainRoutes } from '../navigators/MainNavigator'
 import { RootParamList, RootRoutes } from '../navigators/RootNavigator'
 import { StatusBar, Unmasked } from '@suresure/react-native-components'
 
@@ -13,8 +12,8 @@ import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 type Props = {
-  navigation: StackNavigationProp<MainRoutes & RootRoutes, 'Home'>
-  route: RouteProp<MainParamList & RootParamList, 'Home'>
+  navigation: StackNavigationProp<RootRoutes, 'Quiz'>
+  route: RouteProp<RootParamList, 'Quiz'>
 }
 
 type State = {
@@ -23,7 +22,7 @@ type State = {
   loading: boolean
 }
 
-export default class Home extends React.Component<Props, State> {
+export default class Quiz extends React.Component<Props, State> {
   static contextType = AppContext
   // @ts-ignore
   context: AppState
@@ -42,37 +41,32 @@ export default class Home extends React.Component<Props, State> {
     this.setState({ password })
   }
 
-  gotoQuiz = (params: RootParamList['Quiz']) => {
-    // @ts-ignore
-    this.props.navigation.navigate('Quiz', params)
-  }
-
   render = () => {
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
-          <Title>Home</Title>
-          <Surface style={styles.surface}>
+          <Title>Quiz - {this.props.route.params.title}</Title>
+          {/* <Surface style={styles.surface}>
             <Headline>Kanji training</Headline>
             <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et assumenda non eum, itaque, ipsam dignissimos nemo incidunt qui eligendi sunt eveniet, error inventore aperiam quis. Dolorem nobis quam officia. Id.</Paragraph>
-            <Button onPress={() => this.gotoQuiz({ title: 'Kanji' })}>
+            <Button onPress={this.gotoQuiz}>
               <Text>Start</Text>
             </Button>
           </Surface>
           <Surface style={styles.surface}>
             <Headline>Hiragana training</Headline>
             <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et assumenda non eum, itaque, ipsam dignissimos nemo incidunt qui eligendi sunt eveniet, error inventore aperiam quis. Dolorem nobis quam officia. Id.</Paragraph>
-            <Button onPress={() => this.gotoQuiz({ title: 'Hiragana' })}>
+            <Button onPress={this.gotoQuiz}>
               <Text>Start</Text>
             </Button>
           </Surface>
           <Surface style={styles.surface}>
             <Headline>Katakana training</Headline>
             <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et assumenda non eum, itaque, ipsam dignissimos nemo incidunt qui eligendi sunt eveniet, error inventore aperiam quis. Dolorem nobis quam officia. Id.</Paragraph>
-            <Button onPress={() => this.gotoQuiz({ title: 'Katakana' })}>
+            <Button onPress={this.gotoQuiz}>
               <Text>Start</Text>
             </Button>
-          </Surface>
+          </Surface> */}
           {/* <Image style={styles.logo} source={Logo} />
         <Caption>Email</Caption>
         <Unmasked onChangeText={this.setEmail} style={styles.input} keyboardType='email-address' />

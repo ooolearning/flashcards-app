@@ -5,6 +5,7 @@ export type Routes = {
   Register: undefined
   Home: undefined
   Profile: undefined
+  Quiz: undefined
 }
 
 export type AppState = {

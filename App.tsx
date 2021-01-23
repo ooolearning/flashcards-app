@@ -62,6 +62,7 @@ export default class App extends React.Component<{}, AppState> {
       }}>
         <ThemeProvider theme={{
           ...DefaultTheme,
+          roundness: 20,
           colors: {
             ...DefaultTheme.colors,
             accent: Colors.primary,

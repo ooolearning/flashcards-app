@@ -6,7 +6,17 @@ import Home from '../screens/Home'
 import Profile from '../screens/Profile'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-const { Navigator, Screen } = createBottomTabNavigator()
+export type MainRoutes = {
+  Home: undefined
+  Profile: undefined
+}
+
+export type MainParamList = {
+  Home: undefined
+  Profile: undefined
+}
+
+const { Navigator, Screen } = createBottomTabNavigator<MainParamList>()
 
 export default class MainNavigator extends React.Component {
   render = () => {
@@ -14,6 +24,9 @@ export default class MainNavigator extends React.Component {
       <Navigator
         tabBarOptions={{
           activeTintColor: Colors.primary,
+          labelStyle: {
+            fontFamily: 'OpenSans-Regular',
+          },
         }}>
         <Screen
           name='Home'

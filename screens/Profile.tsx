@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { AppContext, AppState, Routes } from '../AppContext'
 import { Button, Caption, Text, Title } from 'react-native-paper'
-import { Image, SafeAreaView, StyleSheet } from 'react-native'
+import { Image, SafeAreaView, ScrollView, StyleSheet } from 'react-native'
 import { StatusBar, Unmasked } from '@suresure/react-native-components'
 
 import Colors from '../Colors'
@@ -42,19 +42,21 @@ export default class Profile extends React.Component<Props, State> {
 
   render = () => {
     return (
-      <SafeAreaView style={{ paddingTop: 14, alignItems: 'center', paddingHorizontal: 40 }}>
-        <Title>Profile</Title>
-        {/* <Image style={styles.logo} source={Logo} />
+      <SafeAreaView style={styles.safeAreaView}>
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
+          <Title>Profile</Title>
+          {/* <Image style={styles.logo} source={Logo} />
         <Caption>Email</Caption>
         <Unmasked onChangeText={this.setEmail} style={styles.input} keyboardType='email-address' />
         <Caption>Password</Caption>
         <Unmasked onChangeText={this.setPassword} style={styles.input} secureTextEntry />
         <Button onPress={this.callLogin}>
           <Text>Login</Text>
-        </Button>
-        <Button onPress={this.gotoRegister}>
+          </Button>
+          <Button onPress={this.gotoRegister}>
           <Text>Register</Text>
         </Button> */}
+        </ScrollView>
         <StatusBar translucent barStyle='dark-content' backgroundColor='transparent' />
       </SafeAreaView>
     )
@@ -64,15 +66,26 @@ export default class Profile extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   input: {
     backgroundColor: Colors.light,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    width: '100%',
     borderRadius: 100,
-    textAlign: 'center',
     marginBottom: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    textAlign: 'center',
+    width: '100%',
   },
   logo: {
-    width: 140,
     height: 140,
+    width: 140,
+  },
+  contentContainer: {
+    alignItems: 'center',
+    paddingTop: 14,
+  },
+  scrollView: {
+    width: '100%',
+    height: '100%',
+  },
+  safeAreaView: {
+    alignItems: 'center',
   },
 })
