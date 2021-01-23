@@ -1,5 +1,12 @@
 import * as React from 'react'
 
+export type Routes = {
+  Login: undefined
+  Register: undefined
+  Home: undefined
+  Profile: undefined
+}
+
 export type AppState = {
   profile: {
     username: string
@@ -7,7 +14,8 @@ export type AppState = {
   }
   loading: boolean
   logged: boolean
-  login: Function
+  login: (email: string, password: string) => void
+  register: (email: string, password: string, username: string) => void
 }
 
 const State: AppState = {
@@ -18,6 +26,7 @@ const State: AppState = {
   loading: true,
   logged: false,
   login: () => { },
+  register: () => { },
 }
 
 const AppContext = React.createContext(State)

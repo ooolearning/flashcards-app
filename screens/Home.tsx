@@ -10,7 +10,7 @@ import Logo from '../assets/icon.png'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 type Props = {
-  navigation: StackNavigationProp<Routes, 'Login'>
+  navigation: StackNavigationProp<Routes, 'Home'>
 }
 
 type State = {
@@ -18,15 +18,10 @@ type State = {
   password: string
 }
 
-export default class Login extends React.Component<Props, State> {
+export default class Home extends React.Component<Props, State> {
   static contextType = AppContext
   // @ts-ignore
   context: AppState
-
-  state = {
-    email: '',
-    password: '',
-  }
 
   setEmail = (email: string) => {
     this.setState({ email })
@@ -37,7 +32,8 @@ export default class Login extends React.Component<Props, State> {
   }
 
   callLogin = () => {
-    this.context.login(this.state.email, this.state.password)
+    alert('Login')
+    alert(this.context.logged)
   }
 
   gotoRegister = () => {
@@ -47,8 +43,8 @@ export default class Login extends React.Component<Props, State> {
   render = () => {
     return (
       <SafeAreaView style={{ paddingTop: 14, alignItems: 'center', paddingHorizontal: 40 }}>
-        <Title>Login</Title>
-        <Image style={styles.logo} source={Logo} />
+        <Title>Home</Title>
+        {/* <Image style={styles.logo} source={Logo} />
         <Caption>Email</Caption>
         <Unmasked onChangeText={this.setEmail} style={styles.input} keyboardType='email-address' />
         <Caption>Password</Caption>
@@ -58,7 +54,7 @@ export default class Login extends React.Component<Props, State> {
         </Button>
         <Button onPress={this.gotoRegister}>
           <Text>Register</Text>
-        </Button>
+        </Button> */}
         <StatusBar translucent barStyle='dark-content' backgroundColor='transparent' />
       </SafeAreaView>
     )

@@ -19,12 +19,22 @@ const defaultFont: FontType = {
 export default class App extends React.Component<{}, AppState> {
   state = State
 
-  login = () => {
+  login = (email: string, password: string) => {
     this.setState({
       logged: true,
       profile: {
-        email: 'a@a.com',
+        email,
         username: 'User',
+      },
+    })
+  }
+
+  register = (email: string, password: string, username: string) => {
+    this.setState({
+      logged: true,
+      profile: {
+        email,
+        username,
       },
     })
   }

@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { AppContext, AppState, Routes } from '../AppContext'
 import { Button, Caption, Text, Title } from 'react-native-paper'
 import { Image, SafeAreaView, StyleSheet } from 'react-native'
 import { StatusBar, Unmasked } from '@suresure/react-native-components'
@@ -9,7 +10,7 @@ import Logo from '../assets/icon.png'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 type Props = {
-  navigation: StackNavigationProp<{ Login: undefined, Register: undefined }, 'Login'>
+  navigation: StackNavigationProp<Routes, 'Register'>
 }
 
 type State = {
@@ -19,6 +20,10 @@ type State = {
 }
 
 export default class Register extends React.Component<Props, State> {
+  static contextType = AppContext
+  // @ts-ignore
+  context: AppState
+
   setUsername = (username: string) => {
     this.setState({ username })
   }
@@ -32,7 +37,7 @@ export default class Register extends React.Component<Props, State> {
   }
 
   callRegister = () => {
-    alert('Register')
+    this.context.register(this.state.email, this.state.password, this.state.username)
   }
 
   goBack = () => {
