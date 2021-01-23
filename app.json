@@ -23,7 +23,7 @@
     "android": {
       "package": "com.ooolearning.flashcards",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },

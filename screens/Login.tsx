@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { AppContext, AppState } from '../AppContext'
 import { Button, Caption, Text, Title } from 'react-native-paper'
 import { Image, SafeAreaView, StyleSheet } from 'react-native'
 import { StatusBar, Unmasked } from '@suresure/react-native-components'
@@ -18,6 +19,10 @@ type State = {
 }
 
 export default class Login extends React.Component<Props, State> {
+  static contextType = AppContext
+  // @ts-ignore
+  context: AppState
+
   setEmail = (email: string) => {
     this.setState({ email })
   }
@@ -28,6 +33,7 @@ export default class Login extends React.Component<Props, State> {
 
   callLogin = () => {
     alert('Login')
+    alert(this.context.logged)
   }
 
   gotoRegister = () => {
@@ -40,7 +46,7 @@ export default class Login extends React.Component<Props, State> {
         <Title>Login</Title>
         <Image style={styles.logo} source={Logo} />
         <Caption>Email</Caption>
-        <Unmasked onChangeText={this.setEmail} style={styles.input} />
+        <Unmasked onChangeText={this.setEmail} style={styles.input} keyboardType='email-address' />
         <Caption>Password</Caption>
         <Unmasked onChangeText={this.setPassword} style={styles.input} secureTextEntry />
         <Button onPress={this.callLogin}>

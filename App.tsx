@@ -3,6 +3,7 @@ import 'react-native-gesture-handler'
 import * as Font from 'expo-font'
 import * as React from 'react'
 
+import { AppContext, AppState, State } from './AppContext'
 import { DefaultTheme, ThemeProvider, configureFonts } from 'react-native-paper'
 
 import Colors from './Colors'
@@ -15,13 +16,17 @@ const defaultFont: FontType = {
   fontWeight: 'normal',
 }
 
-type State = {
-  loading: boolean
-}
+export default class App extends React.Component<{}, AppState> {
+  state = State
 
-export default class App extends React.Component<{}, State> {
-  state = {
-    loading: true,
+  login = () => {
+    this.setState({
+      logged: true,
+      profile: {
+        email: 'a@a.com',
+        username: 'User',
+      },
+    })
   }
 
   componentDidMount = async () => {
@@ -41,25 +46,30 @@ export default class App extends React.Component<{}, State> {
   render = () => {
     if (this.state.loading) return null
     return (
-      <ThemeProvider theme={{
-        ...DefaultTheme,
-        colors: {
-          ...DefaultTheme.colors,
-          accent: Colors.primary,
-        },
-        fonts: configureFonts({
-          default: {
-            light: defaultFont,
-            regular: defaultFont,
-            medium: defaultFont,
-            thin: defaultFont,
-          },
-        }),
+      <AppContext.Provider value={{
+        ...this.state,
+        login: this.login,
       }}>
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
-      </ThemeProvider>
+        <ThemeProvider theme={{
+          ...DefaultTheme,
+          colors: {
+            ...DefaultTheme.colors,
+            accent: Colors.primary,
+          },
+          fonts: configureFonts({
+            default: {
+              light: defaultFont,
+              regular: defaultFont,
+              medium: defaultFont,
+              thin: defaultFont,
+            },
+          }),
+        }}>
+          <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+        </ThemeProvider>
+      </AppContext.Provider>
     )
   }
 }

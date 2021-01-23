@@ -47,7 +47,7 @@ export default class Register extends React.Component<Props, State> {
         <Caption>Username</Caption>
         <Unmasked onChangeText={this.setUsername} style={styles.input} />
         <Caption>Email</Caption>
-        <Unmasked onChangeText={this.setEmail} style={styles.input} />
+        <Unmasked onChangeText={this.setEmail} style={styles.input} keyboardType='email-address' />
         <Caption>Password</Caption>
         <Unmasked onChangeText={this.setPassword} style={styles.input} secureTextEntry />
         <Button onPress={this.callRegister}>
