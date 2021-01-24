@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { ActivityIndicator, Button, Caption, Headline, Modal, Paragraph, Surface, Text, Title } from 'react-native-paper'
+import { ActivityIndicator, Button, Caption, Headline, Modal, Paragraph, Subheading, Surface, Text, Title, TouchableRipple } from 'react-native-paper'
 import { AppContext, AppState } from '../AppContext'
-import { Image, SafeAreaView, ScrollView, StyleSheet } from 'react-native'
+import { Image, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 import { RootParamList, RootRoutes } from '../navigators/RootNavigator'
 import { StatusBar, Unmasked } from '@suresure/react-native-components'
 
@@ -11,14 +11,21 @@ import Logo from '../assets/icon.png'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+type Question = {
+  question: string
+  answers: {
+    text: string
+    correct: boolean
+  }[]
+}
+
 type Props = {
   navigation: StackNavigationProp<RootRoutes, 'Quiz'>
   route: RouteProp<RootParamList, 'Quiz'>
 }
 
 type State = {
-  email: string
-  password: string
+  questions: Question[]
   loading: boolean
 }
 
@@ -27,25 +34,68 @@ export default class Quiz extends React.Component<Props, State> {
   // @ts-ignore
   context: AppState
 
-  state = {
-    email: '',
-    password: '',
+  state: State = {
+    questions: [
+      {
+        question: 'Dare',
+        answers: [
+          { text: 'Who', correct: true },
+          { text: 'When', correct: false },
+          { text: 'Why', correct: false },
+          { text: 'How', correct: false },
+          { text: 'Which', correct: false },
+        ],
+      },
+      {
+        question: 'Yakusoku',
+        answers: [
+          { text: 'Destiny', correct: false },
+          { text: 'Existence', correct: false },
+          { text: 'Promise', correct: true },
+          { text: 'Honor', correct: false },
+          { text: 'Soup', correct: false },
+        ],
+      },
+      {
+        question: 'Oyasumi',
+        answers: [
+          { text: 'Good afternoon', correct: false },
+          { text: 'No problem', correct: false },
+          { text: 'Good night', correct: true },
+          { text: 'Thank you', correct: false },
+          { text: 'Don\'t worry', correct: false },
+        ],
+      },
+    ],
     loading: true,
   }
 
-  setEmail = (email: string) => {
-    this.setState({ email })
-  }
-
-  setPassword = (password: string) => {
-    this.setState({ password })
-  }
-
   render = () => {
+    const index: number = Math.floor(Math.random() * 2)
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
           <Title>Quiz - {this.props.route.params.title}</Title>
+          <Surface style={styles.surface}>
+            <Subheading>{this.state.questions[index].question}</Subheading>
+          </Surface>
+
+          <View style={{ width: '100%', paddingHorizontal: 20, paddingVertical: 10, justifyContent: 'space-between', flexDirection: 'row' }}>
+            {
+              this.state.questions[index].answers.map((v, k) => {
+                return (
+                  <Surface key={k.toString()} style={styles.cards}>
+                    <Paragraph>{v.text}</Paragraph>
+                    <TouchableRipple
+                      style={{ position: 'absolute', width: '100%', height: '100%' }}
+                      onPress={() => alert(v.correct ? 'Correct' : 'Wrong')}><View /></TouchableRipple>
+                  </Surface>
+                )
+              })
+            }
+          </View>
+
+
           {/* <Surface style={styles.surface}>
             <Headline>Kanji training</Headline>
             <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et assumenda non eum, itaque, ipsam dignissimos nemo incidunt qui eligendi sunt eveniet, error inventore aperiam quis. Dolorem nobis quam officia. Id.</Paragraph>
@@ -114,6 +164,14 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     padding: 14,
     width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+  },
+  cards: {
+    width: 60,
+    height: 60,
+    //padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 4,

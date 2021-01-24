@@ -28,7 +28,7 @@ export default class Home extends React.Component<Props, State> {
   // @ts-ignore
   context: AppState
 
-  state = {
+  state: State = {
     email: '',
     password: '',
     loading: true,
