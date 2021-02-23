@@ -71,7 +71,7 @@ export default class Quiz extends React.Component<Props, State> {
   }
 
   render = () => {
-    const index: number = Math.floor(Math.random() * 2)
+    const index: number = Math.floor(Math.random() * 3)
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
@@ -94,7 +94,6 @@ export default class Quiz extends React.Component<Props, State> {
               })
             }
           </View>
-
 
           {/* <Surface style={styles.surface}>
             <Headline>Kanji training</Headline>
